@@ -26,8 +26,8 @@ class PaymentService {
 
   void openCheckout(double amount) {
     var options = {
-      'key': 'rzp_test_1DP5mmOlF5G5ag', // Valid public test key
-      'amount': (amount * 100).toInt(), // amount in paisa
+      'key': 'rzp_test_1DP5mmOlF5G5ag',
+      'amount': (amount * 100).toInt(),
       'name': 'Torkk Rides',
       'description': 'Ride Fare',
       'prefill': {

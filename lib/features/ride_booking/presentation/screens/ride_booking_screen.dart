@@ -48,7 +48,7 @@ class RideBookingScreen extends StatelessWidget {
         children: [
           GoogleMap(
             initialCameraPosition: const CameraPosition(
-              target: LatLng(28.6139, 77.2090), // Default to New Delhi
+              target: LatLng(28.6139, 77.2090),
               zoom: 14,
             ),
             myLocationEnabled: true,

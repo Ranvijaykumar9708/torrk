@@ -1,18 +1,38 @@
-# torkk
+# Torkk
 
-A new Flutter project.
+A minimalist ride-booking application built with Flutter.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- **Location Selection**: Autocomplete location search and reverse geocoding for current GPS coordinates using Google Maps APIs.
+- **Live Routing**: Real-time map rendering of pickup and drop-off points with polyline route drawing using the Google Directions API.
+- **Dynamic Fares**: Real-time fare calculation based on actual driving distance and estimated time.
+- **Ride Tracking**: Custom vehicle animations simulating the driver approaching the pickup point.
+- **Payments**: Integrated Razorpay checkout flow for seamless ride payments.
 
-A few resources to get you started if this is your first Flutter project:
+## Architecture
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+This project follows a feature-first modular architecture. State management is handled using `Provider` (`ChangeNotifier`).
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-# torrk
+### Core Components
+- `RideBookingProvider`: Manages the entire ride lifecycle, including map controllers, markers, routing geometry, and dynamic fare logic.
+- `PaymentService`: Handles Razorpay initialization, checkout events, and callbacks.
+
+## Setup Instructions
+
+1. **Install Dependencies**
+   ```bash
+   flutter pub get
+   ```
+
+2. **API Keys**
+   Ensure valid keys are provided in the source for:
+   - Google Maps API (Geocoding & Directions)
+   - Razorpay Test/Live Key (Configured in `PaymentService`)
+
+3. **Run the App**
+   ```bash
+   flutter run
+   ```
+
+*Note: Android requires `minSdkVersion 21` or higher for the Razorpay SDK to compile correctly.*

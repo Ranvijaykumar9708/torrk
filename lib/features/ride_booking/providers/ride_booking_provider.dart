@@ -71,14 +71,11 @@ class RideBookingProvider extends ChangeNotifier {
           if (data['status'] == 'OK' && (data['routes'] as List).isNotEmpty) {
             final route = data['routes'][0];
             final leg = route['legs'][0];
-            
-            // Extract Distance (meters) and Duration (seconds)
             final distanceMeters = leg['distance']['value'] as int;
             final durationSeconds = leg['duration']['value'] as int;
             
             _calculateDynamicFares(distanceMeters / 1000, durationSeconds / 60);
 
-            // Draw Polyline
             final points = _decodePoly(route['overview_polyline']['points']);
             _polylines = {
               Polyline(
@@ -104,7 +101,6 @@ class RideBookingProvider extends ChangeNotifier {
       Vehicle(id: '3', name: 'Cab', estimatedFare: (40 + (distanceKm * 12) + (durationMins * 2)).roundToDouble()),
       Vehicle(id: '4', name: 'XL Cab', estimatedFare: (60 + (distanceKm * 18) + (durationMins * 3)).roundToDouble()),
     ];
-    // Automatically reselect vehicle with new price if one was already selected
     if (selectedVehicle != null) {
       selectedVehicle = availableVehicles.firstWhere((v) => v.id == selectedVehicle!.id);
     }
@@ -140,7 +136,6 @@ class RideBookingProvider extends ChangeNotifier {
     dropCoords = null;
     selectedVehicle = null;
     _polylines.clear();
-    // Reset to base fares
     _calculateDynamicFares(0, 0);
     notifyListeners();
   }
@@ -181,19 +176,16 @@ class RideBookingProvider extends ChangeNotifier {
         icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
       ));
     }
-    
-    // Simplified Car Marker
     if (_currentState == RideState.driverAssigned || _currentState == RideState.driverArriving) {
       if (pickupCoords != null) {
         markers.add(Marker(
           markerId: const MarkerId('car'),
-          position: LatLng(pickupCoords!.latitude - 0.002, pickupCoords!.longitude - 0.002), // offset slightly
+          position: LatLng(pickupCoords!.latitude - 0.002, pickupCoords!.longitude - 0.002),
           icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueOrange),
         ));
       }
     } else if (_currentState == RideState.rideStarted) {
       if (pickupCoords != null && dropCoords != null) {
-        // halfway point simulation
         markers.add(Marker(
           markerId: const MarkerId('car'),
           position: LatLng(

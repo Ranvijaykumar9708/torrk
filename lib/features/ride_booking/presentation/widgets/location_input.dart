@@ -36,7 +36,6 @@ class LocationInput extends StatelessWidget {
         }
       }
     } catch (e) {
-      // Ignore errors
     }
     return [];
   }
@@ -54,7 +53,6 @@ class LocationInput extends StatelessWidget {
         }
       }
     } catch (e) {
-      // Ignore errors
     }
     return null;
   }
@@ -71,7 +69,6 @@ class LocationInput extends StatelessWidget {
         }
       }
     } catch (e) {
-      // Ignore errors
     }
     return 'Current Location';
   }

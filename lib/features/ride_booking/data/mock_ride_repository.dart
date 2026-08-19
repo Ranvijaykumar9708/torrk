@@ -3,7 +3,7 @@ import '../models/ride_state.dart';
 
 class MockRideRepository {
   Stream<RideState> bookRide() async* {
-    // Simulate initial delay
+    
     await Future.delayed(const Duration(seconds: 1));
     yield RideState.searchingForDriver;
     
